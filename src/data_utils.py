@@ -183,14 +183,16 @@ def get_feature_columns(include_race: bool = True) -> List[str]:
     Returns:
         List of feature column names
     """
+    # Base features from manuscript (6 variables)
     base_features = [
         'age', 'male', 'low_income', 'depression_dx',
-        'cost_barrier', 'poor_health', 'region_south'
+        'cost_barrier', 'poor_health'
     ]
 
+    # Race features from manuscript (2 variables)
+    # Note: Manuscript specifies only race_black and race_hispanic
     race_features = [
-        'race_black', 'race_hispanic', 'race_asian',
-        'race_aian', 'race_nhpi', 'race_multiracial', 'race_other'
+        'race_black', 'race_hispanic'
     ]
 
     if include_race:

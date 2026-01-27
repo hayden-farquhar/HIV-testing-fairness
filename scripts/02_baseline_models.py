@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression, LogisticRegressionCV
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from xgboost import XGBClassifier
 from sklearn.metrics import (
@@ -38,17 +38,19 @@ def train_baseline_models(X_train, y_train):
     """Train all baseline models with manuscript hyperparameters."""
     models = {}
 
-    print("\nTraining Logistic Regression...")
-    models['Logistic Regression'] = LogisticRegression(
+    print("\nTraining Logistic Regression (with CV tuning)...")
+    models['Logistic Regression'] = LogisticRegressionCV(
+        cv=5,
         max_iter=1000,
         random_state=42,
-        solver='lbfgs'
+        solver='lbfgs',
+        penalty='l2'
     )
     models['Logistic Regression'].fit(X_train, y_train)
 
     print("Training Random Forest...")
     models['Random Forest'] = RandomForestClassifier(
-        n_estimators=200,
+        n_estimators=100,
         max_depth=10,
         random_state=42,
         n_jobs=-1
@@ -57,8 +59,8 @@ def train_baseline_models(X_train, y_train):
 
     print("Training XGBoost...")
     models['XGBoost'] = XGBClassifier(
-        n_estimators=200,
-        max_depth=6,
+        n_estimators=100,
+        max_depth=5,
         learning_rate=0.1,
         random_state=42,
         use_label_encoder=False,
@@ -69,8 +71,8 @@ def train_baseline_models(X_train, y_train):
 
     print("Training Gradient Boosting...")
     models['Gradient Boosting'] = GradientBoostingClassifier(
-        n_estimators=200,
-        max_depth=6,
+        n_estimators=100,
+        max_depth=5,
         learning_rate=0.1,
         random_state=42
     )

@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression, LogisticRegressionCV
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from xgboost import XGBClassifier
 from sklearn.metrics import accuracy_score, roc_auc_score
@@ -41,28 +41,28 @@ def train_race_blind_models(X_train, y_train):
     """Train models without race features."""
     models = {}
 
-    print("\nTraining race-blind Logistic Regression...")
-    models['Logistic Regression'] = LogisticRegression(
-        max_iter=1000, random_state=42
+    print("\nTraining race-blind Logistic Regression (with CV)...")
+    models['Logistic Regression'] = LogisticRegressionCV(
+        cv=5, max_iter=1000, random_state=42, penalty='l2'
     )
     models['Logistic Regression'].fit(X_train, y_train)
 
     print("Training race-blind Random Forest...")
     models['Random Forest'] = RandomForestClassifier(
-        n_estimators=200, max_depth=10, random_state=42, n_jobs=-1
+        n_estimators=100, max_depth=10, random_state=42, n_jobs=-1
     )
     models['Random Forest'].fit(X_train, y_train)
 
     print("Training race-blind XGBoost...")
     models['XGBoost'] = XGBClassifier(
-        n_estimators=200, max_depth=6, learning_rate=0.1,
+        n_estimators=100, max_depth=5, learning_rate=0.1,
         random_state=42, use_label_encoder=False, eval_metric='logloss', n_jobs=-1
     )
     models['XGBoost'].fit(X_train, y_train)
 
     print("Training race-blind Gradient Boosting...")
     models['Gradient Boosting'] = GradientBoostingClassifier(
-        n_estimators=200, max_depth=6, learning_rate=0.1, random_state=42
+        n_estimators=100, max_depth=5, learning_rate=0.1, random_state=42
     )
     models['Gradient Boosting'].fit(X_train, y_train)
 

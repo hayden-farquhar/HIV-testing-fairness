@@ -1,0 +1,10 @@
+# BRFSS Data Download Instructions
+
+Download BRFSS 2024 data from:
+https://www.cdc.gov/brfss/annual_data/annual_2024.html
+
+Required files:
+- LLCP2024.ASC (ASCII data file)
+- Codebook (for column positions)
+
+Place the .ASC file in this directory.

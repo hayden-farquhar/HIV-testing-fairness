@@ -146,12 +146,17 @@ Expected results from the analysis (manuscript values):
 
 If you use this code, please cite:
 
+> Algorithmic Fairness Audit of HIV Testing Prediction Models.
+> DOI: [10.64898/2026.01.27.26344936](https://doi.org/10.64898/2026.01.27.26344936)
+
 ```bibtex
-@article{hiv_testing_fairness_2024,
+@article{hiv_testing_fairness_2026,
   title={Algorithmic Fairness Audit of HIV Testing Prediction Models},
   author={[Authors]},
   journal={[Journal]},
-  year={2024}
+  year={2026},
+  doi={10.64898/2026.01.27.26344936},
+  url={https://doi.org/10.64898/2026.01.27.26344936}
 }
 ```
 
